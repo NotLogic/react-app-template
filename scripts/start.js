@@ -91,11 +91,19 @@ checkBrowsers(paths.appPath, isInteractive)
     );
     // 覆写代理
     serverConfig.proxy = {
+      // 当请求url中包含 '/apis' 时就会进行代理，可以配置多个代理
       '/apis': {
         target: '',  //  需要代理的后台地址
         changeOrigin: true,
         pathRewrite: {
           '^/apis': '/'
+        }
+      },
+      '/tests': {
+        target: '',  //  需要代理的后台地址
+        changeOrigin: true,
+        pathRewrite: {
+          '^/tests': '/'
         }
       }
     }

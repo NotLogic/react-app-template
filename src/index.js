@@ -1,21 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import 'antd/dist/antd.css';
+import {LocaleProvider} from 'antd'  //  国际化
+import zhCN from 'antd/lib/locale-provider/zh_CN';   //  国际化
+
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 // 引入 window.fetch polyfill
 import 'whatwg-fetch' 
 
 // 路由
-import {BrowserRouter as Router} from 'react-router-dom'
-import routes from '@/router/routes'
+import MyRouter from '@/router'
 // 状态管理
+import { Provider } from 'react-redux'
+import store from './redux'
 
 
 ReactDOM.render((
-  <Router>
-    {routes}
-  </Router>
+  <Provider store={store}>
+    <LocaleProvider locale={zhCN}>
+      <MyRouter />
+    </LocaleProvider>
+  </Provider>
   ), document.getElementById('root')
 );
 
